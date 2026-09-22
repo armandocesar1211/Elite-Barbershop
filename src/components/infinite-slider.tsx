@@ -1,7 +1,7 @@
 'use client';
 import type { CSSProperties, ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 type InfiniteSliderProps = {
   children: ReactNode;
@@ -41,5 +41,5 @@ export function InfiniteSlider({ children, gap = 14, duration = 34, durationOnHo
 
 const marquee = keyframes`to{transform:translate3d(calc(-1 * var(--slider-distance)),0,0)}`;
 const Viewport = styled.div`width:100%;overflow:hidden`;
-const Track = styled.div<{$gap:number;$duration:number;$durationOnHover:number;$reverse:boolean;$ready:boolean}>`--slider-gap:${p=>p.$gap}px;display:flex;width:max-content;min-width:max-content;animation:${p=>p.$ready?`${marquee} ${p.$duration}s linear infinite`:'none'};animation-direction:${p=>p.$reverse?'reverse':'normal'};&:hover{animation-duration:${p=>p.$durationOnHover}s}@media(prefers-reduced-motion:reduce){animation:none;[aria-hidden="true"]{display:none}}`;
+const Track = styled.div<{$gap:number;$duration:number;$durationOnHover:number;$reverse:boolean;$ready:boolean}>`--slider-gap:${p=>p.$gap}px;display:flex;width:max-content;min-width:max-content;animation:${p=>p.$ready?css`${marquee} ${p.$duration}s linear infinite`:'none'};animation-direction:${p=>p.$reverse?'reverse':'normal'};&:hover{animation-duration:${p=>p.$durationOnHover}s}@media(prefers-reduced-motion:reduce){animation:none;[aria-hidden="true"]{display:none}}`;
 const Group = styled.div`display:flex;flex:0 0 auto;gap:var(--slider-gap);padding-right:var(--slider-gap)`;
